@@ -2,7 +2,7 @@
 
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 [![GitHub license](https://img.shields.io/github/license/andreflor21/go_bananas_api)](https://github.com/andreflor21/api-go-bananas/blob/main/LICENSE)
-[![GitHub release](https://img.shields.io/github/release/andreflor21/go_bananas_api)](https://GitHub.com/andreflor21/api-go-bananas/releases/)
+[![GitHub release](https://img.shields.io/github/v/release/andreflor21/go_bananas_api?include_prereleases)](https://GitHub.com/andreflor21/api-go-bananas/releases/)
 
 ## Run Dev server
 
