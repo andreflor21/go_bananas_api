@@ -32,6 +32,12 @@ pip freeze > requirements.txt
 
 ## Migrations
 
+### First Migration (Before the creation of the folder Migrations)
+
+```shell
+flask db init
+```
+
 ### New migrations
 
 ```shell

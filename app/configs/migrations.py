@@ -10,6 +10,6 @@ def init_app(app: Flask):
     # from app.models.customers_model import CustomersModel
     # from app.models.partners_model import PartnersModel
     # from app.models.residences_model import ResidencesModel
-    # from app.models.orders_model import OrdersModel
+    from app.models.accounts_model import UserModel
 
     Migrate(app, app.db)
