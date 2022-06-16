@@ -1,6 +1,6 @@
 from datetime import date, datetime
 from app.configs.database import db
-from sqlalchemy import Integer, Column, CHAR, VARCHAR, DATE, DATETIME
+from sqlalchemy import Integer, Column, CHAR, VARCHAR, DATE, TIMESTAMP
 from dataclasses import dataclass
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -25,7 +25,7 @@ class UserModel(db.Model):
     cpf = Column(CHAR(11), nullable=False, unique=True)
     phone = Column(CHAR(11), nullable=True)
     birth_date = Column(DATE(), nullable=True)
-    created_at = Column(DATE(), default=datetime.now())
+    created_at = Column(TIMESTAMP(), default=datetime.now())
 
     @property
     def password(self) -> None:

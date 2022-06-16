@@ -28,7 +28,7 @@ def upgrade():
         sa.Column("cpf", sa.CHAR(length=11), nullable=False),
         sa.Column("phone", sa.CHAR(length=11), nullable=True),
         sa.Column("birth_date", sa.DATE(), nullable=True),
-        sa.Column("created_at", sa.DATE(), nullable=True),
+        sa.Column("created_at", sa.TIMESTAMP(), nullable=True),
         sa.PrimaryKeyConstraint("id"),
         sa.UniqueConstraint("cpf"),
         sa.UniqueConstraint("email"),
