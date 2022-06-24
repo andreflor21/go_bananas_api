@@ -1,10 +1,12 @@
 from datetime import date, datetime
 from app.configs.database import db
-from sqlalchemy import Integer, Column, CHAR, VARCHAR, DATE, TIMESTAMP
+from sqlalchemy import Boolean, Integer, Column, CHAR, VARCHAR, DATE, TIMESTAMP
 from dataclasses import dataclass
 from werkzeug.security import check_password_hash, generate_password_hash
 
 # from app.utils.exceptions import UserNotFoundError, WrongPasswordError
+
+
 @dataclass
 class UserModel(db.Model):
     id: int
@@ -15,6 +17,8 @@ class UserModel(db.Model):
     phone: str
     birth_date: date
     created_at: datetime
+    is_admin: bool
+    address_id: "addresses_model.AddressModel"
 
     __tablename__ = "users"
     id = Column(Integer, primary_key=True)
@@ -26,6 +30,8 @@ class UserModel(db.Model):
     phone = Column(CHAR(11), nullable=True)
     birth_date = Column(DATE(), nullable=True)
     created_at = Column(TIMESTAMP(), default=datetime.now())
+    is_admin = Column(Boolean, default=False)
+    address_id = db.relationship("AddressModel", backref="user")
 
     @property
     def password(self) -> None:
