@@ -16,7 +16,7 @@ def check_valid_request(data: dict, valid_keys: tuple, required=False):
             raise InvalidKeysError(valid_keys=valid_keys, invalid_keys=invalid_keys)
         if len(missing_keys) > 0:
             raise MissingKeysError(
-                keys_sent=[key for key in data.key()], missing_keys=missing_keys
+                keys_sent=[key for key in data.keys()], missing_keys=missing_keys
             )
 
     else:
