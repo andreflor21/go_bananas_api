@@ -9,7 +9,7 @@ def init_app(app: Flask):
     # from app.models.address_model import AddressModel
     # from app.models.customers_model import CustomersModel
     # from app.models.partners_model import PartnersModel
-    # from app.models.residences_model import ResidencesModel
-    from app.models.accounts_model import UserModel
+    from app.models.users_model import UserModel
+    from app.models.addresses_model import AddressModel
 
     Migrate(app, app.db)
