@@ -40,3 +40,13 @@ def patch(id: int):
         return jsonify(err.msg), HTTPStatus.BAD_REQUEST
     except ex.UserNotFoundError as err:
         return (err.__dict__, HTTPStatus.NOT_FOUND)
+
+
+@bp_users.get("/user/<int:id>")
+@jwt_required()
+def get(id: int):
+    try:
+        user = users_controller.get_user_by_id(_id=id)
+        return (jsonify(user), HTTPStatus.OK)
+    except ex.UserNotFoundError as err:
+        return (err.__dict__, HTTPStatus.NOT_FOUND)

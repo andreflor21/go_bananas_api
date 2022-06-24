@@ -1,20 +1,24 @@
 from http import HTTPStatus
 from flask import current_app, jsonify, request
 from sqlalchemy.exc import IntegrityError
-from ..models.accounts_model import UserModel
-from flask_jwt_extended import create_access_token
+
+from ..models.addresses_model import AddressModel
+from ..models.users_model import UserModel
+from flask_jwt_extended import create_access_token, jwt_required
 from datetime import timedelta
 from ..utils.exeptions import UserNotFoundError
 from ..utils import check_valid_request as cvr, exeptions as ex
-from ..utils.valid_keys import user_keys
+from ..utils.valid_keys import user_keys, admin_keys
 
 
 def register(data=None):
     try:
         if data is None:
             data = request.get_json()
-        cvr.check_valid_request(data=data, valid_keys=user_keys, required=True)
-
+        if "is_admin" in data.keys():
+            cvr.check_valid_request(data=data, valid_keys=admin_keys, required=True)
+        else:
+            cvr.check_valid_request(data=data, valid_keys=user_keys, required=True)
         password_to_hash = data.pop("password")
         new_user = UserModel(**data)
         new_user.password = password_to_hash
@@ -39,13 +43,14 @@ def register(data=None):
 
 def get_user_by_id(_id: int) -> dict:
     user = UserModel.query.filter_by(id=_id).first()
-
+    addresses = AddressModel.query.filter_by(user_id=_id)
     cur_identity = dict(
         email=user.email,
         first_name=user.first_name,
         last_name=user.last_name,
         cpf=user.cpf,
         phone=user.phone,
+        addresses=list(addresses),
     )
     return cur_identity
 
@@ -77,4 +82,4 @@ def patch(_id: int, data: dict) -> UserModel:
 
     current_app.db.session.commit()
 
-    return user_update, HTTPStatus.OK
+    return user_update
